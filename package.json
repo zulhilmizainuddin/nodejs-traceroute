@@ -9,6 +9,10 @@
   },
   "author": "Zulhilmi Mohamed Zainuddin",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zulhilmizainuddin/node-traceroute.git"
+  }
   "keywords": [
     "tracert",
     "traceroute"
