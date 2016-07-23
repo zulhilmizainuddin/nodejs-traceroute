@@ -1,0 +1,16 @@
+{
+  "name": "node-traceroute",
+  "version": "0.1.0",
+  "description": "Node.js wrapper around tracert and traceroute process",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "example": "node ./example.js"
+  },
+  "author": "Zulhilmi Mohamed Zainuddin",
+  "license": "MIT",
+  "keywords": [
+    "tracert",
+    "traceroute"
+  ]
+}
