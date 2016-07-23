@@ -3,6 +3,7 @@
 const spawn = require('child_process').spawn;
 const events = require('events');
 const readline = require('readline');
+const validator = require('validator');
 
 class Process extends events.EventEmitter {
     constructor(command, args) {
@@ -13,6 +14,10 @@ class Process extends events.EventEmitter {
     }
 
     trace(domainName) {
+        if (!this.isValidDomainName(domainName)) {
+            throw "Invalid domain name or IP address";
+        }
+
         this.args.push(domainName);
 
         const process = spawn(this.command, this.args);
@@ -44,6 +49,10 @@ class Process extends events.EventEmitter {
                     }
                 });
         }
+    }
+
+    isValidDomainName(domainName) {
+        return validator.isFQDN(domainName + '') || validator.isIP(domainName + '');
     }
 
     parseDestination(data) {}

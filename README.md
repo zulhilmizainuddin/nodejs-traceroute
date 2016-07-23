@@ -10,23 +10,26 @@ Node.js wrapper around tracert and traceroute process
 ```javascript
 const Traceroute = require('nodejs-traceroute');
 
-const tracer = new Traceroute();
+try {
+    const tracer = new Traceroute();
+    tracer
+        .on('pid', (pid) => {
+            console.log(`pid: ${pid}`);
+        })
+        .on('destination', (destination) => {
+            console.log(`destination: ${destination}`);
+        })
+        .on('hop', (hop) => {
+            console.log(`hop: ${JSON.stringify(hop)}`);
+        })
+        .on('close', (code) => {
+            console.log(`close: code ${code}`);
+        });
 
-tracer
-    .on('pid', (pid) => {
-        console.log(`pid: ${pid}`);
-    })
-    .on('destination', (destination) => {
-        console.log(`destination: ${destination}`);
-    })
-    .on('hop', (hop) => {
-        console.log(`hop: ${JSON.stringify(hop)}`);
-    })
-    .on('close', (code) => {
-        console.log(`close: code ${code}`);
-    });
-
-tracer.trace('github.com');
+    tracer.trace('github.com');
+} catch (ex) {
+    console.log(ex);
+}
 ```
 
 ## Result Example

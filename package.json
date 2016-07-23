@@ -1,6 +1,6 @@
 {
   "name": "nodejs-traceroute",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Node.js wrapper around tracert and traceroute process",
   "main": "index.js",
   "scripts": {
@@ -16,5 +16,8 @@
   "keywords": [
     "tracert",
     "traceroute"
-  ]
+  ],
+  "dependencies": {
+    "validator": "^5.5.0"
+  }
 }
