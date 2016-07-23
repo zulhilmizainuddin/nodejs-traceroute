@@ -1,4 +1,4 @@
-# nodejs-traceroute
+# nodejs-traceroute [![Code Climate](https://codeclimate.com/github/zulhilmizainuddin/nodejs-traceroute/badges/gpa.svg)](https://codeclimate.com/github/zulhilmizainuddin/nodejs-traceroute)
 Node.js wrapper around tracert and traceroute process
 
 ## Install
