@@ -1,5 +1,5 @@
 {
-  "name": "node-traceroute",
+  "name": "nodejs-traceroute",
   "version": "0.1.0",
   "description": "Node.js wrapper around tracert and traceroute process",
   "main": "index.js",
@@ -11,7 +11,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/zulhilmizainuddin/node-traceroute.git"
+    "url": "https://github.com/zulhilmizainuddin/nodejs-traceroute.git"
   },
   "keywords": [
     "tracert",
