@@ -25,7 +25,7 @@ class Tracert extends Process {
     }
 
     parseHop(hopData) {
-        const regex = /^\s*(\d*)\s*(\d+\sms|\*)\s*(\d+\sms|\*)\s*(\d+\sms|\*)\s*([a-zA-Z0-9:.\s]+)/;
+        const regex = /^\s*(\d*)\s*(<?\d+\sms|\*)\s*(<?\d+\sms|\*)\s*(<?\d+\sms|\*)\s*([a-zA-Z0-9:.\s]+)/;
         const parsedData = new RegExp(regex, '').exec(hopData);
 
         let result = null;
