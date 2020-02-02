@@ -3,8 +3,8 @@
 const Process = require('./process');
 
 class Tracert extends Process {
-    constructor() {
-        super('tracert', ['-d']);
+    constructor(use_ipv4=false) {
+        super('tracert', [...(use_ipv4 ? ['-4'] : ''), '-d']);
     }
 
     parseDestination(data) {
