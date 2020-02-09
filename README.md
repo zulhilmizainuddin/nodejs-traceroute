@@ -1,4 +1,4 @@
-# nodejs-traceroute [![Code Climate](https://codeclimate.com/github/zulhilmizainuddin/nodejs-traceroute/badges/gpa.svg)](https://codeclimate.com/github/zulhilmizainuddin/nodejs-traceroute)
+# nodejs-traceroute [![Build Status](https://travis-ci.org/zulhilmizainuddin/nodejs-traceroute.svg?branch=master)](https://travis-ci.org/zulhilmizainuddin/nodejs-traceroute) [![Code Climate](https://codeclimate.com/github/zulhilmizainuddin/nodejs-traceroute/badges/gpa.svg)](https://codeclimate.com/github/zulhilmizainuddin/nodejs-traceroute)
 
 [![NPM](https://nodei.co/npm/nodejs-traceroute.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/nodejs-traceroute/)
 
