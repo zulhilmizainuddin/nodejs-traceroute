@@ -1,10 +1,18 @@
 'use strict';
 
+const Flag = require('./flag');
 const Process = require('./process');
 
 class Tracert extends Process {
-    constructor() {
-        super('tracert', ['-d']);
+    constructor(ipVersion = '') {
+        const args = ['-d'];
+
+        const ipFlag = Flag.getIpFlag(ipVersion);
+        if (ipFlag) {
+            args.push(ipFlag);
+        }
+
+        super('tracert', args);
     }
 
     parseDestination(data) {
