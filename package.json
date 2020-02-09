@@ -18,6 +18,6 @@
     "traceroute"
   ],
   "dependencies": {
-    "validator": "^5.5.0"
+    "validator": "^12.2.0"
   }
 }

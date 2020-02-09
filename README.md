@@ -7,7 +7,11 @@ Node.js wrapper around tracert and traceroute process
 ## Install
 
     npm install --save nodejs-traceroute
-    
+
+## Force IPv4 or IPv6
+By default, the domain name given will be automatically resolved. Explicitly force IPv4 or IPv6 tracerouting by passing either `ipv4` or `ipv6` to the constructor.
+
+
 ## Usage Example
 
 ```javascript

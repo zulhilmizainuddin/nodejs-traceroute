@@ -1,10 +1,18 @@
 'use strict';
 
+const Flag = require('./flag');
 const Process = require('./process');
 
 class Traceroute extends Process {
-    constructor(sendwait = 0) {
-        super('traceroute', ['-q', 1, '-z', sendwait, '-n']);
+    constructor(ipVersion = '', sendwait = 0) {
+        const args = ['-q', 1, '-z', sendwait, '-n'];
+
+        const ipFlag = Flag.getIpFlag(ipVersion);
+        if (ipFlag) {
+            args.push(ipFlag);
+        }
+
+        super('traceroute', args);
     }
 
     parseDestination(data) {

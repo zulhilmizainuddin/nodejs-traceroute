@@ -1,0 +1,22 @@
+---
+language: node_js
+
+node_js:
+  - node
+  - lts/*
+
+os:
+  - linux
+  - osx
+  - windows
+
+addons:
+  apt:
+    packages:
+      - traceroute
+
+install:
+  - npm install
+
+script:
+  - npm run example
