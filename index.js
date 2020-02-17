@@ -1,8 +1,6 @@
-'use strict';
+import os from 'os';
 
-const os = require('os');
+import { Tracert } from './Tracert';
+import { Traceroute } from './Traceroute';
 
-const tracert = require('./tracert');
-const traceroute = require('./traceroute');
-
-module.exports = os.platform() === 'win32' ? tracert : traceroute;
+module.exports = os.platform() === 'win32' ? Tracert : Traceroute;
