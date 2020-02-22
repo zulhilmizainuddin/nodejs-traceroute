@@ -1,7 +1,8 @@
 import { spawn } from 'child_process';
 import events from 'events';
 import readline from 'readline';
-import validator from 'validator';
+
+import { Validation } from './Validation';
 
 export class Process extends events.EventEmitter {
   constructor(command, args) {
@@ -12,7 +13,7 @@ export class Process extends events.EventEmitter {
   }
 
   trace(domainName) {
-    if (!this.isValidDomainName(domainName)) {
+    if (!Validation.isValidDomainName(domainName)) {
       throw new Error('Invalid domain name or IP address');
     }
 
@@ -47,10 +48,6 @@ export class Process extends events.EventEmitter {
           }
         });
     }
-  }
-
-  isValidDomainName(domainName) {
-    return validator.isFQDN(`${domainName}`) || validator.isIP(`${domainName}`);
   }
 
   // eslint-disable-next-line no-unused-vars
