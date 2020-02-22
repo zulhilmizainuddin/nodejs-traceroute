@@ -4,10 +4,10 @@
   "description": "Node.js wrapper around tracert and traceroute process",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "example": "babel-node ./src/example.js",
     "lint:dry": "eslint --fix-dry-run .",
-    "lint:fix": "eslint --fix ."
+    "lint:fix": "eslint --fix .",
+    "test": "nyc mocha test/**/*.spec.js --require babel-register --exit"
   },
   "author": "Zulhilmi Mohamed Zainuddin",
   "license": "MIT",
@@ -26,8 +26,11 @@
     "babel-cli": "^6.26.0",
     "babel-eslint": "^10.0.3",
     "babel-preset-env": "^1.7.0",
+    "chai": "^4.2.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.20.1"
+    "eslint-plugin-import": "^2.20.1",
+    "mocha": "^7.0.1",
+    "nyc": "^15.0.0"
   }
 }
