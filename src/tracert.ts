@@ -1,9 +1,7 @@
-'use strict';
+import { Flag } from './flag';
+import { Process } from './process';
 
-const Flag = require('./flag');
-const Process = require('./process');
-
-class Tracert extends Process {
+export class Tracert extends Process {
     constructor(ipVersion = '') {
         const args = ['-d'];
 
@@ -15,7 +13,7 @@ class Tracert extends Process {
         super('tracert', args);
     }
 
-    parseDestination(data) {
+    parseDestination(data: string) {
         const regex = /^Tracing\sroute\sto\s([a-zA-Z0-9:.]+)\s(?:\[([a-zA-Z0-9:.]+)\])?/;
         const parsedData = new RegExp(regex, '').exec(data);
 
@@ -32,7 +30,7 @@ class Tracert extends Process {
         return result;
     }
 
-    parseHop(hopData) {
+    parseHop(hopData: string) {
         const regex = /^\s*(\d*)\s*(<?\d+\sms|\*)\s*(<?\d+\sms|\*)\s*(<?\d+\sms|\*)\s*([a-zA-Z0-9:.\s]+)/;
         const parsedData = new RegExp(regex, '').exec(hopData);
 
@@ -50,5 +48,3 @@ class Tracert extends Process {
         return result;
     }
 }
-
-module.exports = Tracert;

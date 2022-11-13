@@ -1,19 +1,15 @@
-'use strict';
+import events from 'events';
+import readline from 'readline';
+import validator from 'validator';
 
-const spawn = require('child_process').spawn;
-const events = require('events');
-const readline = require('readline');
-const validator = require('validator');
+import { spawn } from 'child_process';
 
-class Process extends events.EventEmitter {
-    constructor(command, args) {
+export class Process extends events.EventEmitter {
+    constructor(private command: string, private args: string[]) {
         super();
-
-        this.command = command;
-        this.args = args;
     }
 
-    trace(domainName) {
+    trace(domainName: string) {
         if (!this.isValidDomainName(domainName)) {
             throw "Invalid domain name or IP address";
         }
@@ -51,12 +47,10 @@ class Process extends events.EventEmitter {
         }
     }
 
-    isValidDomainName(domainName) {
+    isValidDomainName(domainName: string) {
         return validator.isFQDN(domainName + '') || validator.isIP(domainName + '');
     }
 
-    parseDestination(data) {}
-    parseHop(hopData) {}
+    parseDestination(data: string) {}
+    parseHop(hopData: string) {}
 }
-
-module.exports = Process;

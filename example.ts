@@ -1,6 +1,4 @@
-'use strict';
-
-const Traceroute = require('./index');
+import Traceroute from './src/index';
 
 try {
     const tracer = new Traceroute();
