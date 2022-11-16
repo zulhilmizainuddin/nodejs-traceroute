@@ -4,12 +4,20 @@ import validator from 'validator';
 
 import { spawn } from 'child_process';
 
-export class Process extends events.EventEmitter {
+export interface Hop {
+    hop: number;
+    ip: string;
+    rtt1: string;
+    rtt2?: string;
+    rtt3?: string;
+}
+
+export abstract class Process extends events.EventEmitter {
     constructor(private command: string, private args: string[]) {
         super();
     }
 
-    trace(domainName: string) {
+    public trace(domainName: string) {
         if (!this.isValidDomainName(domainName)) {
             throw "Invalid domain name or IP address";
         }
@@ -47,10 +55,10 @@ export class Process extends events.EventEmitter {
         }
     }
 
-    isValidDomainName(domainName: string) {
+    private isValidDomainName(domainName: string): boolean {
         return validator.isFQDN(domainName + '') || validator.isIP(domainName + '');
     }
 
-    parseDestination(data: string) {}
-    parseHop(hopData: string) {}
+    abstract parseDestination(data: string): string | null;
+    abstract parseHop(hopData: string): Hop | null;
 }

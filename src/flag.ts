@@ -1,5 +1,5 @@
 export class Flag {
-    static getIpFlag(ipVersion: string) {
+    static getIpFlag(ipVersion: string): string {
         let ipFlag = '';
 
         switch(ipVersion) {

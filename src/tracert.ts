@@ -1,8 +1,8 @@
 import { Flag } from './flag';
-import { Process } from './process';
+import { Hop, Process } from './process';
 
 export class Tracert extends Process {
-    constructor(ipVersion = '') {
+    constructor(ipVersion: string = '') {
         const args = ['-d'];
 
         const ipFlag = Flag.getIpFlag(ipVersion);
@@ -13,7 +13,7 @@ export class Tracert extends Process {
         super('tracert', args);
     }
 
-    parseDestination(data: string) {
+    public parseDestination(data: string): string | null {
         const regex = /^Tracing\sroute\sto\s([a-zA-Z0-9:.]+)\s(?:\[([a-zA-Z0-9:.]+)\])?/;
         const parsedData = new RegExp(regex, '').exec(data);
 
@@ -30,11 +30,11 @@ export class Tracert extends Process {
         return result;
     }
 
-    parseHop(hopData: string) {
+    public parseHop(hopData: string): Hop | null {
         const regex = /^\s*(\d*)\s*(<?\d+\sms|\*)\s*(<?\d+\sms|\*)\s*(<?\d+\sms|\*)\s*([a-zA-Z0-9:.\s]+)/;
         const parsedData = new RegExp(regex, '').exec(hopData);
 
-        let result = null;
+        let result: Hop | null = null;
         if (parsedData !== null) {
             result = {
                 hop: parseInt(parsedData[1], 10),
