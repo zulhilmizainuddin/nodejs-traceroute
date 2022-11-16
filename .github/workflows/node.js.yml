@@ -5,9 +5,8 @@ name: Node.js CI
 
 on:
   push:
-    branches: ["master"]
   pull_request:
-    branches: ["master"]
+    branches: [master]
 
 jobs:
   build:
@@ -30,6 +29,7 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run example
+        cache: 'yarn'
+    - run: yarn install
+    - run: yarn lint
+    - run: yarn example

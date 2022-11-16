@@ -1,7 +1,5 @@
-'use strict';
-
-class Flag {
-    static getIpFlag(ipVersion) {
+export class Flag {
+    static getIpFlag(ipVersion: string): string {
         let ipFlag = '';
 
         switch(ipVersion) {
@@ -18,5 +16,3 @@ class Flag {
         return ipFlag;
     }
 }
-
-module.exports = Flag;

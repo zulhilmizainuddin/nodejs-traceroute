@@ -1,11 +1,9 @@
-'use strict';
+import { Flag } from './flag';
+import { Hop, Process } from './process';
 
-const Flag = require('./flag');
-const Process = require('./process');
-
-class Traceroute extends Process {
+export class Traceroute extends Process {
     constructor(ipVersion = '', sendwait = 0) {
-        const args = ['-q', 1, '-z', sendwait, '-n'];
+        const args = ['-q', '1', '-z', `${sendwait}`, '-n'];
 
         const ipFlag = Flag.getIpFlag(ipVersion);
         if (ipFlag) {
@@ -15,7 +13,7 @@ class Traceroute extends Process {
         super('traceroute', args);
     }
 
-    parseDestination(data) {
+    public  parseDestination(data: string): string | null {
         const regex = /^traceroute\sto\s(?:[a-zA-Z0-9:.]+)\s\(([a-zA-Z0-9:.]+)\)/;
         const parsedData = new RegExp(regex, '').exec(data);
 
@@ -27,11 +25,11 @@ class Traceroute extends Process {
         return result;
     }
 
-    parseHop(hopData) {
+    public parseHop(hopData: string): Hop | null {
         const regex = /^\s*(\d+)\s+(?:([a-zA-Z0-9:.]+)\s+([0-9.]+\s+ms)|(\*))/;
         const parsedData = new RegExp(regex, '').exec(hopData);
 
-        let result = null;
+        let result: Hop | null = null;
         if (parsedData !== null) {
             if (parsedData[4] === undefined) {
                 result = {
@@ -52,5 +50,3 @@ class Traceroute extends Process {
         return result;
     }
 }
-
-module.exports = Traceroute;
