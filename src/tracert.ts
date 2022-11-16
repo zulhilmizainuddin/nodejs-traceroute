@@ -2,7 +2,7 @@ import { Flag } from './flag';
 import { Hop, Process } from './process';
 
 export class Tracert extends Process {
-    constructor(ipVersion: string = '') {
+    constructor(ipVersion = '') {
         const args = ['-d'];
 
         const ipFlag = Flag.getIpFlag(ipVersion);

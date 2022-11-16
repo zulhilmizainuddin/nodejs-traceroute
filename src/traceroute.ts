@@ -2,7 +2,7 @@ import { Flag } from './flag';
 import { Hop, Process } from './process';
 
 export class Traceroute extends Process {
-    constructor(ipVersion: string = '', sendwait: number = 0) {
+    constructor(ipVersion = '', sendwait = 0) {
         const args = ['-q', '1', '-z', `${sendwait}`, '-n'];
 
         const ipFlag = Flag.getIpFlag(ipVersion);
