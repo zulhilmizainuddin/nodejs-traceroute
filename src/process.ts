@@ -17,7 +17,7 @@ export abstract class Process extends events.EventEmitter {
         super();
     }
 
-    public trace(domainName: string) {
+    public trace(domainName: string): void {
         if (!this.isValidDomainName(domainName)) {
             throw "Invalid domain name or IP address";
         }
