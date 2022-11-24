@@ -1,4 +1,4 @@
-.idea/
-node_modules/
-lib/
-coverage/
+.idea
+node_modules
+lib
+coverage
