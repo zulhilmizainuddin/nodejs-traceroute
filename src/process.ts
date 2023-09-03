@@ -37,8 +37,8 @@ export abstract class Process extends events.EventEmitter {
         const readStream: ReadStream = createReadStream(this.streamPath);
 
         childProcess.on('close', (code) => {
-            writeStream.close();
-            readStream.close();
+            writeStream.end();
+
             this.emit('close', code);
         });
 
