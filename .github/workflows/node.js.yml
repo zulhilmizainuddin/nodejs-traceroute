@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
         node-version: [18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
@@ -23,7 +23,7 @@ jobs:
     - name: Install traceroute
       if: ${{ matrix.os == 'ubuntu-latest' }}
       run: sudo apt-get install -y traceroute
-    
+
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
@@ -35,5 +35,5 @@ jobs:
 
     - run: yarn lint
 
-    - if: ${{ matrix.os == 'ubuntu-latest' }}
+    - if: ${{ matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest' }}
       run: yarn test
