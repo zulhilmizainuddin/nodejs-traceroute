@@ -19,7 +19,7 @@ export abstract class Process extends events.EventEmitter {
     private readonly streamPath: string =
       path.join(os.platform() === 'win32' ? os.tmpdir() : '/tmp', `nodejs-traceroute-${Date.now()}.txt`);
 
-    protected constructor(private command: string, private args: string[]) {
+    constructor(private command: string, private args: string[]) {
         super();
     }
 
@@ -41,7 +41,8 @@ export abstract class Process extends events.EventEmitter {
         const readStream: ReadStream = createReadStream(this.streamPath);
 
         childProcess.on('close', (code) => {
-            writeStream.end();
+            writeStream.close();
+            readStream.close();
 
             this.emit('close', code);
         });
