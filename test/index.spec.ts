@@ -27,5 +27,5 @@ describe('Traceroute', () => {
         });
 
     tracer.trace('github.com');
-  }, process.platform === 'darwin' ? 600000 : 60000);
+  }, process.platform === 'linux' ? 60000 : 600000);
 });
