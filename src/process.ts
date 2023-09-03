@@ -3,6 +3,7 @@ import readline from 'readline';
 import validator from 'validator';
 
 import { spawn } from 'child_process';
+import { createReadStream, createWriteStream, ReadStream, WriteStream } from 'fs';
 
 export interface Hop {
     hop: number;
@@ -13,6 +14,8 @@ export interface Hop {
 }
 
 export abstract class Process extends events.EventEmitter {
+    private readonly streamPath: string = `/tmp/nodejs-traceroute-${Date.now()}.log`;
+
     constructor(private command: string, private args: string[]) {
         super();
     }
@@ -24,18 +27,28 @@ export abstract class Process extends events.EventEmitter {
 
         this.args.push(domainName);
 
-        const process = spawn(this.command, this.args);
-        process.on('close', (code) => {
+        const childProcess = spawn(this.command, this.args, { stdio: ['ignore', 'pipe', 'pipe'] });
+
+        const writeStream: WriteStream = createWriteStream(this.streamPath);
+
+        childProcess.stdout.pipe(writeStream);
+        childProcess.stderr.pipe(writeStream);
+
+        const readStream: ReadStream = createReadStream(this.streamPath);
+
+        childProcess.on('close', (code) => {
+            writeStream.close();
+            readStream.close();
             this.emit('close', code);
         });
 
-        this.emit('pid', process.pid);
+        this.emit('pid', childProcess.pid);
 
         let isDestinationCaptured = false;
-        if (process.pid) {
+        if (childProcess.pid) {
             readline.createInterface({
-                    input: process.stdout,
-                    terminal: false
+                    input: readStream,
+                    terminal: false,
                 })
                 .on('line', (line) => {
                     if (!isDestinationCaptured) {
