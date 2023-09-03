@@ -1,4 +1,6 @@
 import events from 'events';
+import os from 'os';
+import path from 'path';
 import readline from 'readline';
 import validator from 'validator';
 
@@ -14,7 +16,7 @@ export interface Hop {
 }
 
 export abstract class Process extends events.EventEmitter {
-    private readonly streamPath: string = `/tmp/nodejs-traceroute-${Date.now()}.log`;
+    private readonly streamPath: string = path.join(os.tmpdir(), `nodejs-traceroute-${Date.now()}.txt`);
 
     constructor(private command: string, private args: string[]) {
         super();
