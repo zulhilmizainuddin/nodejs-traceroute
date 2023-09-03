@@ -19,7 +19,7 @@ export abstract class Process extends events.EventEmitter {
     private readonly streamPath: string =
       path.join(os.platform() === 'win32' ? os.tmpdir() : '/tmp', `nodejs-traceroute-${Date.now()}.txt`);
 
-    constructor(private command: string, private args: string[]) {
+    protected constructor(private command: string, private args: string[]) {
         super();
     }
 
