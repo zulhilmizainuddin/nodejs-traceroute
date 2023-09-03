@@ -35,17 +35,5 @@ jobs:
 
     - run: yarn lint
 
-    - name: traceroute macos
-      if: ${{ matrix.os == 'macos-latest' }}
-      run: traceroute -q 1 -z 0 -n -m 5 github.com
-
-    - name: traceroute macos stdout
-      if: ${{ matrix.os == 'macos-latest' }}
-      run: traceroute -q 1 -z 0 -n -m 5 github.com 2>/dev/null
-
-    - name: traceroute macos stderr
-      if: ${{ matrix.os == 'macos-latest' }}
-      run: traceroute -q 1 -z 0 -n -m 5 github.com 1>/dev/null
-
-    - if: ${{ matrix.os == 'ubuntu-latest' }}
+    - if: ${{ matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest' }}
       run: yarn test
