@@ -18,11 +18,14 @@ export abstract class Process extends events.EventEmitter {
     }
 
     public trace(domainName: string): void {
-        if (!this.isValidDomainName(domainName)) {
-            throw "Invalid domain name or IP address";
+        if (validator.isFQDN(domainName) || validator.isIP(domainName)) {
+            this.args.push(domainName);
+        } else if (validator.isURL(domainName)) {
+            const url = new URL(domainName);
+            this.args.push(...[url.hostname, '-p', url.port]);
+        } else {
+            throw "Invalid domain";
         }
-
-        this.args.push(domainName);
 
         const process = spawn(this.command, this.args);
         process.on('close', (code) => {
@@ -53,10 +56,6 @@ export abstract class Process extends events.EventEmitter {
                     }
                 });
         }
-    }
-
-    private isValidDomainName(domainName: string): boolean {
-        return validator.isFQDN(domainName + '') || validator.isIP(domainName + '');
     }
 
     abstract parseDestination(data: string): string | null;

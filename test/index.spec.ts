@@ -2,8 +2,7 @@ import validator from 'validator';
 
 import Traceroute from '../src/index';
 
-describe('Traceroute', () => {
-  it('should verify pid, destination, hops and close code', (wait) => {
+function tracerVaildation(wait: jest.DoneCallback) {
     const tracer = new Traceroute();
 
     tracer
@@ -14,7 +13,7 @@ describe('Traceroute', () => {
             expect(validator.isIP(destination)).toBeTruthy();
         })
         .on('hop', (hopObj) => {
-            const { hop, ip, rtt1 } = hopObj;
+            const {hop, ip, rtt1} = hopObj;
 
             expect(Number.isInteger(hop)).toBeTruthy();
             expect(validator.isIP(ip) || ip === '*').toBeTruthy();
@@ -25,7 +24,25 @@ describe('Traceroute', () => {
 
             wait();
         });
+    return tracer;
+}
 
-    tracer.trace('github.com');
-  }, 60000);
+describe('Traceroute', () => {
+    it('URL: should verify pid, destination, hops and close code', (wait) => {
+        const tracer = tracerVaildation(wait);
+
+        tracer.trace('google.com');
+    }, 60000);
+
+    it('URL + Port: should verify pid, destination, hops and close code', (wait) => {
+        const tracer = tracerVaildation(wait);
+
+        tracer.trace('google.com:443');
+    }, 60000);
+
+    it('IP: should verify pid, destination, hops and close code', (wait) => {
+        const tracer = tracerVaildation(wait);
+
+        tracer.trace('127.0.0.1');
+    }, 60000);
 });
